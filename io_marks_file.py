@@ -58,7 +58,7 @@ def print_stats_to_screen(marks):
     thisday = date.today()    
     print"Statistics generated on date: "+ str(thisday)
     
-    bar = '----'*4
+    bar = '-----'*4
     print bar
     
     print "Mean: %0.2f" % mean(marks)
@@ -70,25 +70,27 @@ def print_stats_to_screen(marks):
     print bar
     
 
-def write_stats_to_file(outputfile,marks):
+def write_stats_to_file(outputfile,inputfile, marks):
     '''Write the mean, sample standard deviation, minimum and maximum marks
     to an output file'''
     
+    print "Writing statistics to file ",outputfile
     thisday = date.today()
     
     fobj = open(outputfile,'w')
     
-    fobj.write("Statistics generated on date: "+ str(thisday))
+    fobj.write("Statistics generated on date: "+ str(thisday)+" \n")
+    fobj.write("For file: "+inputfile +"\n")
     
     bar = '----'*4
-    fobj.write(bar)
+    fobj.write(bar+" \n")
     
-    fobj.write("Mean: %0.2f" % mean(marks))
-    fobj.write("Sample SD: %0.2f "%std(marks,ddof=1))
-    fobj.write(bar)
-    fobj.write("Min: %0.2f" %amin(marks))
-    fobj.write("Max: %0.2f"%amax(marks))          
-    fobj.write("Range: %0.2f" % amax(marks)-amin(marks))
-    fobj.write(bar)
+    fobj.write("Mean: %0.2f" % mean(marks)+" \n")
+    fobj.write("Sample SD: %0.2f "%std(marks,ddof=1)+" \n")
+    fobj.write(bar+" \n")
+    fobj.write("Min: %0.2f" %amin(marks)+" \n")
+    fobj.write("Max: %0.2f"%amax(marks)+" \n")          
+    fobj.write("Range: %0.2f" % (amax(marks)-amin(marks))+" \n")
+    fobj.write(bar+" \n")
     
     

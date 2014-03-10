@@ -8,8 +8,10 @@ import io_marks_file as io
 import numpy as np
 import matplotlib.pyplot as plt
 
-print "Marks Statistics Calculator"
+
 bar= "-----"*4
+print bar
+print "Marks Statistics Calculator"
 print bar
 
 # File format should be as follows
@@ -19,24 +21,25 @@ print bar
 if(len(argv) > 1):
     inputfile = argv[1]
 else:
-    inputfile = raw_input("What is the marks file?")
+    inputfile = raw_input("What is the marks file? ")
 
 # Read names, matric numbers and marks
 
 names, matrics, marks, markmin,markmax = io.read_marks_file(inputfile)
 
+print bar
 print"Students: ",names
 print "Matric Numbers: ", matrics 
 print "Marks: ", marks
 
 io.print_stats_to_screen(marks)
 
+
 # Make histogram of statistics
 
 nbins = 10
 binsequence = np.linspace(markmin,markmax, num=nbins)
 dbin = (binsequence[1]-binsequence[0])/2.0
-
 
 fig1 = plt.figure()
 
@@ -61,13 +64,15 @@ ax2.set_xlim(markmin,markmax)
 ax2.scatter(bins[:-1]+dbin, counts, color='red', marker='x')
 ax2.plot(bins[:-1]+dbin,counts,color='red')
 
-plt.show()
+print "Saving plot to histogram.png"
 plt.savefig("histogram.png", format='png')
+print bar
 
 # Write statistics to file
 
 outputfile = "stats_"+inputfile
-io.write_stats_to_file(outputfile, marks)
+io.write_stats_to_file(outputfile,inputfile, marks)
+print bar
 
 
 
